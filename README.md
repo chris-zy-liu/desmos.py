@@ -13,7 +13,7 @@ You can find a demo with a Mandelbrot explorer ([`examples/mandelbrot.py`](examp
 ## Installation
 
 ```bash
-pip install desmos-py
+pip install desmosdotpy
 ```
 
 For development:
