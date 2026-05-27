@@ -10,6 +10,7 @@ from .actions import Action, Var, LatexExpr, _latex_of
 from .translate import Translator, _func_ident
 from . import primitives as _prim
 from . import iter as _iter
+from . import field as _field
 
 
 _TEMPLATE_PATH = Path(__file__).parent / "template.html"
@@ -136,6 +137,7 @@ class Graph:
         return _prim.rectangle(self, anchor, width, height, **kw)
     def point(self, position, **kw):           return _prim.point(self, position, **kw)
     def line(self, p1, p2, **kw):              return _prim.line(self, p1, p2, **kw)
+    def arrow(self, p1, p2, **kw):              return _prim.arrow(self, p1, p2, **kw)
     def text(self, label, position, **kw):     return _prim.text(self, label, position, **kw)
 
     # ---- iteration + heatmap ----
@@ -144,6 +146,9 @@ class Graph:
     def heatmap(self, value_fn, *, x_range, y_range, max_value, **kw):
         return _iter.heatmap(self, value_fn, x_range=x_range, y_range=y_range,
                              max_value=max_value, **kw)
+    def field(self, Ex_fn, Ey_fn, *, x_range, y_range, **kw):
+        return _field.field(self, Ex_fn, Ey_fn,
+                            x_range=x_range, y_range=y_range, **kw)
 
     # ---- @g.func: compile a Python function to a Desmos function expression ----
     def func(self, fn):

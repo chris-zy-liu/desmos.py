@@ -33,9 +33,9 @@ dependencies = []
 dev = ["pytest>=7", "build", "twine"]
 
 [project.urls]
-Homepage = "https://github.com/chriszyliu/desmos.py"
-Repository = "https://github.com/chriszyliu/desmos.py"
-Issues = "https://github.com/chriszyliu/desmos.py/issues"
+Homepage = "https://github.com/chris-zy-liu/desmos.py"
+Repository = "https://github.com/chris-zy-liu/desmos.py"
+Issues = "https://github.com/chris-zy-liu/desmos.py/issues"
 
 [tool.setuptools.packages.find]
 include = ["desmos*"]

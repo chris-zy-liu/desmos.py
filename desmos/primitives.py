@@ -65,6 +65,34 @@ def line(g, p1, p2, *, color=None, line_width=None, line_style=None):
     ))
 
 
+def arrow(g, p1, p2, *, color=None, head_size=0.15, line_width=None):
+    """Draw an arrow from ``p1`` to ``p2`` with a filled triangle head.
+
+    Endpoints must be plain numbers (the head geometry is precomputed in Python).
+    For vector fields with dynamic endpoints, use ``line`` with vectorised
+    LaTeX or build the head LaTeX yourself.
+    """
+    import math
+    x1, y1 = float(p1[0]), float(p1[1])
+    x2, y2 = float(p2[0]), float(p2[1])
+    dx, dy = x2 - x1, y2 - y1
+    length = math.hypot(dx, dy)
+    if length == 0:
+        return line(g, p1, p2, color=color, line_width=line_width)
+    ux, uy = dx / length, dy / length              # unit along arrow
+    nx, ny = -uy, ux                                # unit perpendicular
+    bx, by = x2 - ux * head_size, y2 - uy * head_size
+    lx, ly = bx + nx * head_size * 0.5, by + ny * head_size * 0.5
+    rx, ry = bx - nx * head_size * 0.5, by - ny * head_size * 0.5
+    pts = [(x1, y1), (x2, y2), (lx, ly), (x2, y2), (rx, ry)]
+    parts = ",".join(rf"\left({_latex_of(px)},{_latex_of(py)}\right)" for px, py in pts)
+    latex = rf"\operatorname{{polygon}}\left({parts}\right)"
+    return g._add(Expression(
+        id=g._new_id(), latex=latex,
+        **_opt_style(color=color, line_width=line_width),
+    ))
+
+
 def text(g, label, position, *, color=None):
     x, y = position
     latex = rf"\left({_latex_of(x)},{_latex_of(y)}\right)"
