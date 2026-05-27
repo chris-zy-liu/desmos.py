@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "desmos-py"
+version = "0.1.0"
+description = "Build interactive Desmos graphs from Python — geometry, sliders, buttons, and a Python-to-Desmos-LaTeX compiler."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Chris Zhengyu Liu", email = "chris.zy.liu@gmail.com" }]
+keywords = ["desmos", "graphing", "visualization", "interactive", "latex"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Education",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "build", "twine"]
+
+[project.urls]
+Homepage = "https://github.com/chriszyliu/desmos.py"
+Repository = "https://github.com/chriszyliu/desmos.py"
+Issues = "https://github.com/chriszyliu/desmos.py/issues"
+
+[tool.setuptools.packages.find]
+include = ["desmos*"]
+exclude = ["tests*", "examples*"]
+
+[tool.setuptools.package-data]
+desmos = ["template.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
